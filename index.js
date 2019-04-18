@@ -17,7 +17,11 @@ massive(CONNECTION_STRING).then(dbInstance=>{
 
 app.get('/api/products', dbCtrl.getAll)
 app.get('/api/products/:id', dbCtrl.getOne)
-app.post('/api/products', dbCtrl.create)
+app.post('/api/products/create', dbCtrl.create)
+//above three done 
+
+app.put('/api/products', dbCtrl.update)
+app.delete('/api/products/:id', dbCtrl.delete)
 
 
 app.listen(SERVER_PORT, () => console.log(`listening on ${SERVER_PORT}`))
