@@ -31,12 +31,19 @@ module.exports = {
     ).catch((err) => console.log(500, err, "getOne failed"))
   },
 
-  update() {
+  update(req, res) {
     const dbInstance = req.app.get('db')
+    
+    dbInstance.update_product([req.query.description, req.params.id])
+    .then((response)=>res.status(200).send(response))
+    .catch((err)=res.status('update failed'))
   },
 
-  delete() {
+  delete(req, res) {
     const dbInstance = req.app.get('db')
+    dbInstance.delete_product([req.params.id])
+    .then((response)=> res.status(200).send(response))
+    .catch((err)=> res.status(500).send(err))
   }
 
 }
