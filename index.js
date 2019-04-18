@@ -1,0 +1,19 @@
+const express = require('express')
+const app = express()
+require('dotenv').config()
+const massive = require('massive')
+const { SERVER_PORT, CONNECTION_STRING } = process.env;
+
+app.use(express.json())
+
+
+//get a better understanding of what these do below!!
+
+massive(CONNECTION_STRING).then(dbInstance=>{
+  app.set('db', dbInstance)
+}).catch((err)=> console.log(`error: ${err}`))
+
+
+app.listen(SERVER_PORT, () => console.log(`listening on ${SERVER_PORT}`))
+
+
