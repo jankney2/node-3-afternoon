@@ -6,16 +6,21 @@ module.exports = {
       res.status(200).send(response)
     }).catch((err)=>console.log("YOU DONE MESSED UP A-A-RON", err))
 
-    )
+    
 
   },
 
   create() {
     const dbInstance = req.app.get('db')
+    let {name, description, price, imageUrl}= req.query
+dbInstance.create_product([name, description, price, imageUrl]).then((response)=> res.status(200).send(response)).catch((err)=>console.log("create failure", err))
   },
 
-  getOne() {
+  getOne(req, res) {
     const dbInstance = req.app.get('db')
+    dbInstance.read_product([req.params.id]).then(
+      (response)=>res.status(200).send(response)
+    ).catch((err)=>console.log(500, err, "getOne failed"))
   },
 
   update() {
